@@ -26,9 +26,11 @@ export default function Home() {
         ]
     };
 
-    const logoImage = '/images/avatar.png';
+    const logoImage = '/images/butler/logo.png';
     const appStoreBadgeImage = '/images/butler/appstore_badge.svg';
     const playStoreBadgeImage = '/images/butler/playstore.png';
+
+    const isMobile = /Mobi/i.test(window?.navigator.userAgent);
 
     const home = {
         label: 'Home',
@@ -43,14 +45,24 @@ export default function Home() {
               direction="column"
               justifyContent="center"
               alignItems="center">
-            <Flex minWidth="s" >
-                <Flex direction="column">
+            {isMobile ?
+                (<Flex direction="column" paddingTop='xl'>
                     <RevealFx translateY="8" delay={0.2}>
-                        <Image src={logoImage} alt="logo" width={300} height={300}/>
+                        <Image src={logoImage} alt="logo" width={200} height={200}/>
                     </RevealFx>
-                </Flex>
+                </Flex>) : (<></>)
+            }
+            <Flex minWidth={isMobile ? undefined : "s"}>
+                {isMobile ? (<></>) :
+                    (<Flex direction="column">
+                        <RevealFx translateY="8" delay={0.2}>
+                            <Image src={logoImage} alt="logo" width={300} height={300}/>
+                        </RevealFx>
+                    </Flex>)
+                }
                 <Flex direction="column"
                       fillWidth
+                      paddingBottom={isMobile ? 'xl' : undefined}
                       justifyContent="center"
                       alignItems="center">
                     <RevealFx translateY="4">

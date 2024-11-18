@@ -18,6 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                                         }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const isMobile = /Mobi/i.test(window?.navigator.userAgent);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -49,6 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     return (
         <Flex
             width={'s'}
+            maxWidth={isMobile ? 'xs' : undefined}
             gap="m"
             direction="column">
             {images[activeIndex] && <Flex onClick={handleImageClick}>
@@ -73,7 +75,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </Flex>}
             {images.length > 1 && (
                 <Flex
-                    gap="4" paddingX="s"
+                    gap="4"
+                    paddingX={isMobile ? undefined : 's'}
                     fillWidth
                     justifyContent="center">
                     {images.map((_, index) => (
@@ -94,14 +97,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 </Flex>
             )}
             <Flex mobileDirection="column"
-                  minWidth={'s'}
-                  paddingX="xs"
+                  paddingX={isMobile ? undefined : 'xs'}
                   paddingTop="12"
                   paddingBottom="24">
                 {title && (
                     <Flex flex={5}>
                         <Heading
                             as="h2"
+                            align={isMobile ? "center" : "left"}
+                            paddingBottom={isMobile ? 'l' : undefined}
                             wrap="balance"
                             variant="heading-strong-xl">
                             {title}
@@ -109,17 +113,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     </Flex>
                 )}
                 { description && (
-                    <Flex maxWidth='xs' direction={'column'}>
+                    <Flex maxWidth={isMobile ? undefined : 'xs'} direction={'column'}>
                         <Text
                             as="span"
-                            align="right"
+                            align={isMobile ? "center" : "right"}
                             variant="body-default-s"
                             onBackground="neutral-weak">
                             {description}
                         </Text>
                         <Text
                             as="span"
-                            align="right"
+                            align={isMobile ? "center" : "right"}
                             paddingTop={'s'}
                             variant="body-default-s"
                             onBackground="neutral-weak">
