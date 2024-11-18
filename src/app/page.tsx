@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
     Heading,
@@ -30,7 +30,13 @@ export default function Home() {
     const appStoreBadgeImage = '/images/butler/appstore_badge.svg';
     const playStoreBadgeImage = '/images/butler/playstore.png';
 
-    const isMobile = /Mobi/i.test(window?.navigator.userAgent);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Get the user agent string
+        const userAgent = navigator.userAgent.toLowerCase();
+        setIsMobile(/mobile|android|iphone|ipad|ipod/.test(userAgent));
+    }, []);
 
     const home = {
         label: 'Home',
