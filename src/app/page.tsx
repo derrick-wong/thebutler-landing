@@ -28,7 +28,7 @@ export default function Home() {
 
     const logoImage = '/images/avatar.png';
     const appStoreBadgeImage = '/images/butler/appstore_badge.svg';
-    const playStoreBadgeImage = '/images/butler/playstore-soon.png';
+    const playStoreBadgeImage = '/images/butler/playstore.png';
 
     const home = {
         label: 'Home',
@@ -69,18 +69,21 @@ export default function Home() {
                                 {home.subline}
                             </Text>
                         </Flex>
-                        <Flex direction="row" justifyContent="center"
+                    </RevealFx>
+                    <RevealFx translateY="8" delay={0.2}>
+                        <Flex direction="row"
+                              justifyContent="center"
                               alignItems="center">
                             <Image
                                 src={appStoreBadgeImage}
-                                alt="app store badge"
+                                alt="Apple App Store"
                                 width={150}
                                 height={70}
                                 style={{paddingRight: 10}}
                             />
                             <Image
                                 src={playStoreBadgeImage}
-                                alt="play store badge"
+                                alt="Google Play Store"
                                 width={150}
                                 height={50}
                             />
