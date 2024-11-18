@@ -9,7 +9,7 @@ import { baseURL, style, meta, og, schema, social } from "@/once-ui/resources/co
 
 import { Background, Flex } from '@/once-ui/components'
 
-import { Inter } from 'next/font/google'
+import {Inter, Sora} from 'next/font/google'
 import { Roboto_Mono } from 'next/font/google';
 
 const primary = Inter({
@@ -32,7 +32,12 @@ type FontConfig = {
 	Replace with code for secondary and tertiary fonts
 	from https://once-ui.com/customize
 */
-const secondary: FontConfig | undefined = undefined;
+const secondary = Sora({
+	variable: '--font-secondary',
+	subsets: ['latin'],
+	display: 'swap'
+});
+
 const tertiary: FontConfig | undefined = undefined;
 /*
 */
@@ -71,7 +76,7 @@ const schemaData = {
 	"@type": schema.type,
 	"url": "https://" + baseURL,
 	"logo": schema.logo,
-	"name": schema.name,
+	"name": schema.title,
 	"description": schema.description,
 	"email": schema.email,
 	"sameAs": Object.values(social).filter(Boolean)
@@ -109,14 +114,9 @@ export default function RootLayout({
 					style={{zIndex: '-1'}}
 					position="fixed"
 					mask="cursor"
-					dots={{
-						display: true,
-						opacity: 0.4,
-						size: '20'
-					}}
 					gradient={{
 						display: true,
-						opacity: 0.4,
+						opacity: 1,
 					}}/>
 				<Flex
 					flex={1} direction="column">

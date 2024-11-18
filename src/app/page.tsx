@@ -2,141 +2,105 @@
 
 import React from 'react';
 
-import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, LetterFx, Arrow } from '@/once-ui/components';
-import Link from 'next/link';
+import {
+    Heading,
+    Text,
+    Flex,
+    RevealFx
+} from '@/once-ui/components';
+import Image from "next/image";
+import {ProjectCard} from "@/once-ui/components/ProjectCard";
+import {Footer} from "@/once-ui/components/Footer";
 
 export default function Home() {
-	const links = [
-		{
-			href: "https://once-ui.com/docs/theming",
-			title: "Themes",
-			description: "Style your app in minutes.",
-		},
-		{
-			href: "https://once-ui.com/docs/flexComponent",
-			title: "Layout",
-			description: "Build responsive layouts.",
-		},
-		{
-			href: "https://once-ui.com/docs/typography",
-			title: "Typography",
-			description: "Scale text automatically.",
-		},
-	];
+    const content = {
+        slug: 'content',
+        title: "One-click task manager for Moms to easily send requests to partners.",
+        publishedAt: "2024-11-17",
+        summary: "Moms often are holding their little one in one arm and juggling a task in another.",
+        footer: "Let us help, it's free!",
+        images: [
+            "/images/butler/butler-1.png",
+            "/images/butler/butler-3.png",
+            "/images/butler/butler-2.png"
+        ]
+    };
 
-	return (
-		<Flex
-			fillWidth paddingTop="l" paddingX="l"
-			direction="column" alignItems="center" flex={1}>
-			<Flex
-				position="relative"
-				as="section" overflow="hidden"
-				fillWidth minHeight="0" maxWidth={68}
-				direction="column" alignItems="center" flex={1}>
-				<Flex
-					as="main"
-					direction="column" justifyContent="center"
-					fillWidth fillHeight padding="l" gap="l">
-					<Flex
-						mobileDirection="column"
-						fillWidth gap="24">
-						<Flex
-							position="relative"
-							flex={2} paddingTop="56" paddingX="xl">
-							<Logo size="xl" icon={false} style={{zIndex: '1'}} href="https://once-ui.com"/>
-						</Flex>
-						<Flex
-							position="relative"
-							flex={4} gap="24" marginBottom="104"
-							direction="column">
-							<InlineCode
-								className="shadow-m"
-								style={{
-									width: 'fit-content',
-									padding: 'var(--static-space-8) var(--static-space-16)',
-									backdropFilter: 'blur(var(--static-space-1))'}}>
-								Start by editing <span className="brand-on-background-medium">app/page.tsx</span>
-							</InlineCode>
-							<Heading
-								wrap="balance"
-								variant="display-strong-s">
-								<span className="font-code">
-									<LetterFx
-										trigger="instant">
-										Helping designers code and developers design
-									</LetterFx>
-								</span>
-							</Heading>
-							<Button
-								id="readDocs"
-								href="https://once-ui.com/docs"
-								variant="secondary">
-								<Flex alignItems="center">
-									Read docs
-									<Arrow trigger="#readDocs"/>
-								</Flex>
-							</Button>
-						</Flex>
-					</Flex>
-					<Grid
-						radius="l"
-						border="neutral-medium"
-						borderStyle="solid-1"
-						columns="repeat(3, 1fr)"
-						tabletColumns="1col"
-						mobileColumns="1col"
-						fillWidth>
-						{links.map((link) => (
-							<Link
-								target="_blank"
-								style={{ padding: 'var(--responsive-space-l)' }}
-								key={link.href}
-								href={link.href}>
-								<Flex
-									fillWidth paddingY="8" gap="8"
-									direction="column">
-									<Flex
-										fillWidth gap="12"
-										alignItems="center">
-										<Text
-											variant="body-strong-m" onBackground="neutral-strong">
-											{link.title}
-										</Text>
-										<Icon size="s" name="arrowUpRight" />
-									</Flex>
-									<Text
-										variant="body-default-s" onBackground="neutral-weak">
-										{link.description}
-									</Text>
-								</Flex>
-							</Link>
-						))}
-					</Grid>
-				</Flex>
-			</Flex>
-			<Flex
-				as="footer"
-				position="relative"
-				fillWidth paddingX="l" paddingY="m"
-				justifyContent="space-between">
-				<Text
-					variant="body-default-s" onBackground="neutral-weak">
-					© 2024 Once UI, <Link href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">MIT License</Link>
-				</Text>
-				<Flex
-					gap="12">
-					<Button
-						href="https://github.com/once-ui-system/nextjs-starter"
-						prefixIcon="github" size="s" variant="tertiary">
-						GitHub
-					</Button>
-					<Button
-						href="https://discord.com/invite/5EyAQ4eNdS"
-						prefixIcon="discord" size="s" variant="tertiary">
-						Discord
-					</Button>
-				</Flex>
-			</Flex>
-		</Flex>
-	);
+    const logoImage = '/images/avatar.png';
+    const appStoreBadgeImage = '/images/butler/appstore_badge.svg';
+    const playStoreBadgeImage = '/images/butler/playstore-soon.png';
+
+    const home = {
+        label: 'Home',
+        title: `The Būtler`,
+        description: `Built to help moms by dads.`,
+        headline: <>The Būtler</>,
+        subline: <>Built to help Moms by Dads.</>
+    }
+
+    return (
+        <Flex fillWidth
+              direction="column"
+              justifyContent="center"
+              alignItems="center">
+            <Flex minWidth="s" >
+                <Flex direction="column">
+                    <RevealFx translateY="8" delay={0.2}>
+                        <Image src={logoImage} alt="logo" width={300} height={300}/>
+                    </RevealFx>
+                </Flex>
+                <Flex direction="column"
+                      fillWidth
+                      justifyContent="center"
+                      alignItems="center">
+                    <RevealFx translateY="4">
+                        <Heading wrap="balance" variant="display-strong-l" align={'center'}>
+                            {home.headline}
+                        </Heading>
+                    </RevealFx>
+                    <RevealFx translateY="8" delay={0.2}>
+                        <Flex fillWidth justifyContent="center"
+                              alignItems="center">
+                            <Text
+                                wrap="balance"
+                                onBackground="neutral-weak"
+                                variant="heading-default-xl"
+                            >
+                                {home.subline}
+                            </Text>
+                        </Flex>
+                        <Flex direction="row" justifyContent="center"
+                              alignItems="center">
+                            <Image
+                                src={appStoreBadgeImage}
+                                alt="app store badge"
+                                width={150}
+                                height={70}
+                                style={{paddingRight: 10}}
+                            />
+                            <Image
+                                src={playStoreBadgeImage}
+                                alt="play store badge"
+                                width={150}
+                                height={50}
+                            />
+                        </Flex>
+                    </RevealFx>
+                </Flex>
+            </Flex>
+            <RevealFx translateY="16" delay={0.6}>
+                <Flex fillWidth
+                      justifyContent="center"
+                      alignItems="center">
+                    <ProjectCard
+                        key={content.slug}
+                        images={content.images}
+                        title={content.title}
+                        description={content.summary}
+                        footer={content.footer}/>
+                </Flex>
+            </RevealFx>
+            <Footer/>
+        </Flex>
+    );
 }
