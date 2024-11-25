@@ -69,3 +69,10 @@ export type TextWeight =
 export type TextSize = TShirtSizes
 
 export type TextVariant = `${TextType}-${TextWeight}-${TextSize}`
+
+export type TextContent = {
+    title: string,
+    publishedAt?: string,
+    summary: string
+    footer?: string
+}

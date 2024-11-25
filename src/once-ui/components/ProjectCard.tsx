@@ -2,19 +2,16 @@
 
 import {AvatarGroup, Flex, Heading, RevealFx, SmartImage, SmartLink, Text} from "@/once-ui/components";
 import {useEffect, useState} from "react";
+import {TextContent} from "@/once-ui/types";
 
 interface ProjectCardProps {
     images: string[];
-    title: string;
-    description: string;
-    footer?: string;
+    text: TextContent[];
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
                                                             images = [],
-                                                            title,
-                                                            description,
-                                                            footer,
+                                                            text = [],
                                                         }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -53,6 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }
     };
 
+    // @ts-ignore
     return (
         <Flex
             width={'s'}
@@ -68,7 +66,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     <SmartImage
                         tabIndex={0}
                         radius="l"
-                        alt={title}
+                        alt={text[activeIndex].title}
                         aspectRatio="16 / 9"
                         src={images[activeIndex]}
                         style={{
@@ -102,42 +100,47 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     ))}
                 </Flex>
             )}
-            <Flex mobileDirection="column"
-                  paddingX={isMobile ? undefined : 'xs'}
-                  paddingTop="12"
-                  paddingBottom="24">
-                {title && (
-                    <Flex flex={5}>
-                        <Heading
-                            as="h2"
-                            align={isMobile ? "center" : "left"}
-                            paddingBottom={isMobile ? 'l' : undefined}
-                            wrap="balance"
-                            variant="heading-strong-xl">
-                            {title}
-                        </Heading>
-                    </Flex>
-                )}
-                { description && (
-                    <Flex maxWidth={isMobile ? undefined : 'xs'} direction={'column'}>
-                        <Text
-                            as="span"
-                            align={isMobile ? "center" : "right"}
-                            variant="body-default-s"
-                            onBackground="neutral-weak">
-                            {description}
-                        </Text>
-                        <Text
-                            as="span"
-                            align={isMobile ? "center" : "right"}
-                            paddingTop={'s'}
-                            variant="body-default-s"
-                            onBackground="neutral-weak">
-                            {footer}
-                        </Text>
-                    </Flex>
-                )}
-            </Flex>
+            <RevealFx
+                style={{width: '100%'}}
+                delay={0.4}
+                trigger={isTransitioning}
+                speed="fast">
+                <Flex mobileDirection="column"
+                      paddingX={isMobile ? undefined : 'xs'}
+                      paddingTop="12"
+                      paddingBottom="24">
+                    {text[activeIndex].title && (
+                        <Flex flex={5}>
+                            <Heading
+                                as="h2"
+                                align={isMobile ? "center" : "left"}
+                                paddingBottom={isMobile ? 'l' : undefined}
+                                wrap="balance"
+                                variant="heading-strong-xl">
+                                {text[activeIndex].title}
+                            </Heading>
+                        </Flex>
+                    )}
+                    {text[activeIndex].summary && (
+                        <Flex maxWidth={isMobile ? undefined : 'xs'} direction={'column'}>
+                            <Text
+                                as="span"
+                                align={isMobile ? "center" : "right"}
+                                variant="body-default-s"
+                                onBackground="neutral-weak">
+                                {text[activeIndex].summary}
+                            </Text>
+                            <Text
+                                as="span"
+                                align={isMobile ? "center" : "right"}
+                                paddingTop={'s'}
+                                variant={activeIndex == 1 ? "body-default-xs" : "body-default-s"}
+                                onBackground="neutral-weak"
+                                dangerouslySetInnerHTML={{ __html: text[activeIndex].footer }} />
+                        </Flex>
+                    )}
+                </Flex>
+            </RevealFx>
         </Flex>
     );
 };
