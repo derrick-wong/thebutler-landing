@@ -136,7 +136,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                 paddingTop={'s'}
                                 variant={activeIndex == 1 ? "body-default-xs" : "body-default-s"}
                                 onBackground="neutral-weak"
-                                dangerouslySetInnerHTML={{ __html: text[activeIndex].footer }} />
+                                dangerouslySetInnerHTML={{ __html: text[activeIndex].footer ?? ''}} />
                         </Flex>
                     )}
                 </Flex>
